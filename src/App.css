@@ -521,4 +521,148 @@ a {
   .section-title h2 {
     font-size: 31px;
   }
+}/* Reading Page */
+
+.reading-page {
+  min-height: 100vh;
+  background: #f7f9fc;
+}
+
+.reading-header {
+  padding: 80px 8%;
+  text-align: center;
+  background: linear-gradient(135deg, #eef4ff, #f7fbff);
+}
+
+.reading-label {
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #4f6fd8;
+}
+
+.reading-header h1 {
+  margin: 0 0 18px;
+  font-size: 48px;
+  color: #1f2a44;
+}
+
+.reading-header > p:last-child {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #667085;
+}
+
+.levels-section {
+  padding: 70px 8%;
+}
+
+.levels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.level-card {
+  padding: 30px;
+  border: 1px solid #e5eaf2;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 12px 30px rgba(31, 42, 68, 0.08);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.level-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(31, 42, 68, 0.14);
+}
+
+.level-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 22px;
+  border-radius: 18px;
+  background: #edf2ff;
+  font-size: 24px;
+  font-weight: 800;
+  color: #4f6fd8;
+}
+
+.level-card h3 {
+  margin: 0 0 14px;
+  font-size: 22px;
+  color: #1f2a44;
+}
+
+.level-card p {
+  min-height: 88px;
+  margin-bottom: 24px;
+  line-height: 1.7;
+  color: #667085;
+}
+
+.level-card button {
+  width: 100%;
+  padding: 13px 18px;
+  border: none;
+  border-radius: 12px;
+  background: #4f6fd8;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease;
+}
+
+.level-card button:hover {
+  background: #3f5fc4;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 950px) {
+  .levels-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .reading-header h1 {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 650px) {
+  .reading-header {
+    padding: 60px 6%;
+  }
+
+  .reading-header h1 {
+    font-size: 34px;
+  }
+
+  .reading-header > p:last-child {
+    font-size: 16px;
+  }
+
+  .levels-section {
+    padding: 50px 6%;
+  }
+
+  .levels-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .level-card p {
+    min-height: auto;
+  }
 }

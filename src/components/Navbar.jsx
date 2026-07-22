@@ -14,17 +14,13 @@ function Navbar() {
 
       <nav className="nav-links">
         <Link to="/">Home</Link>
-
         <Link to="/reading">Reading</Link>
-
         <Link to="/writing">Writing</Link>
-
         <Link to="/vocabulary">Vocabulary</Link>
-
         <Link to="/grammar">Grammar</Link>
 
-        <Link to="/login">
-          <button className="login-btn">Login</button>
+        <Link to="/login" className="login-btn">
+          Login
         </Link>
       </nav>
     </header>

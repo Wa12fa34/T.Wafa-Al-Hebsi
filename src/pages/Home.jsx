@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar.jsx";
+import SkillCard from "../components/cards/SkillCard.jsx";
 
 function Home() {
   const skills = [
@@ -8,6 +8,7 @@ function Home() {
       description:
         "Improve reading comprehension, inference, vocabulary in context, and critical-thinking skills.",
       buttonText: "Explore Reading",
+      link: "/reading",
     },
     {
       title: "Writing",
@@ -15,6 +16,7 @@ function Home() {
       description:
         "Develop clear paragraphs, organized ideas, accurate language, and confident writing skills.",
       buttonText: "Explore Writing",
+      link: "/writing",
     },
     {
       title: "Vocabulary",
@@ -22,6 +24,7 @@ function Home() {
       description:
         "Learn useful English words through context, interactive activities, and meaningful practice.",
       buttonText: "Explore Vocabulary",
+      link: "/vocabulary",
     },
     {
       title: "Grammar",
@@ -29,13 +32,12 @@ function Home() {
       description:
         "Practise grammar rules through clear explanations, examples, and interactive exercises.",
       buttonText: "Explore Grammar",
+      link: "/grammar",
     },
   ];
 
   return (
     <div className="website">
-      <Navbar />
-
       <main>
         <section className="hero-section" id="home">
           <div className="hero-content">
@@ -105,15 +107,14 @@ function Home() {
 
           <div className="skills-grid">
             {skills.map((skill) => (
-              <article className="skill-card" key={skill.title}>
-                <div className="skill-icon">{skill.icon}</div>
-
-                <h3>{skill.title}</h3>
-
-                <p>{skill.description}</p>
-
-                <button type="button">{skill.buttonText}</button>
-              </article>
+              <SkillCard
+                key={skill.title}
+                icon={skill.icon}
+                title={skill.title}
+                description={skill.description}
+                buttonText={skill.buttonText}
+                link={skill.link}
+              />
             ))}
           </div>
         </section>

@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Navbar from "./components/Navbar.jsx";
+
 import Home from "./pages/Home.jsx";
 import Reading from "./pages/Reading.jsx";
 import Writing from "./pages/Writing.jsx";
