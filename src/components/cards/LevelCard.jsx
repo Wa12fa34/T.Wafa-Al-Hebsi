@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function LevelCard({ level, description }) {
   return (
     <article className="level-card">
@@ -7,7 +9,9 @@ function LevelCard({ level, description }) {
 
       <p>{description}</p>
 
-      <button type="button">Start Level</button>
+      <Link to={`/reading/${level}`} className="level-button">
+        Start Level
+      </Link>
     </article>
   );
 }
