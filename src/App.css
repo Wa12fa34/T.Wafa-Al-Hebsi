@@ -665,4 +665,130 @@ a {
   .level-card p {
     min-height: auto;
   }
+}/* Reading Quiz Feedback */
+
+.question-card {
+  margin-bottom: 24px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+}
+
+.question-options {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.question-options label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.question-options label:hover {
+  background: #f8fafc;
+}
+
+.question-feedback {
+  margin-top: 18px;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 12px;
+}
+
+.question-feedback h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.question-feedback p {
+  margin: 6px 0;
+}
+
+.score-card {
+  margin-top: 28px;
+  padding: 22px;
+  text-align: center;
+  background: #f8fafc;
+  border-radius: 16px;
+}
+
+.score-card h2 {
+  margin: 0;
+}/* Correct and Incorrect Answer Styles */
+
+.question-options label.option-correct {
+  background: #ecfdf5;
+  border: 2px solid #22c55e;
+}
+
+.question-options label.option-incorrect {
+  background: #fef2f2;
+  border: 2px solid #ef4444;
+}
+
+.feedback-correct {
+  background: #ecfdf5;
+  border-left: 5px solid #22c55e;
+}
+
+.feedback-incorrect {
+  background: #fef2f2;
+  border-left: 5px solid #ef4444;
+}
+
+.feedback-correct h4 {
+  color: #15803d;
+}
+
+.feedback-incorrect h4 {
+  color: #b91c1c;
+}/* Reading Performance Progress */
+
+.score-card {
+  margin-top: 32px;
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  text-align: center;
+}
+
+.score-summary {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 20px 0;
+}
+
+.score-summary p {
+  margin: 0;
+}
+
+.result-progress {
+  width: 100%;
+  height: 16px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+.result-progress-fill {
+  height: 100%;
+  background: #22c55e;
+  border-radius: 999px;
+  transition: width 0.6s ease;
+}
+
+.performance-message {
+  margin-top: 18px;
+  font-size: 1.25rem;
 }
