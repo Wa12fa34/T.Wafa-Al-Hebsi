@@ -12,13 +12,18 @@ function ReadingLevel() {
   const [answers, setAnswers] = useState({});
   const [score, setScore] = useState(null);
   const [showResults, setShowResults] = useState(false);
+
   const [loading, setLoading] = useState(true);
+  const [savingResult, setSavingResult] = useState(false);
+
   const [errorMessage, setErrorMessage] = useState("");
+  const [resultMessage, setResultMessage] = useState("");
 
   useEffect(() => {
     async function loadReadingActivity() {
       setLoading(true);
       setErrorMessage("");
+      setResultMessage("");
       setShowResults(false);
 
       const { data: passageData, error: passageError } = await supabase
@@ -54,11 +59,12 @@ function ReadingLevel() {
         return;
       }
 
-      const { data: vocabularyData, error: vocabularyError } = await supabase
-        .from("reading_vocabulary")
-        .select("*")
-        .eq("passage_id", passageData.id)
-        .order("created_at", { ascending: true });
+      const { data: vocabularyData, error: vocabularyError } =
+        await supabase
+          .from("reading_vocabulary")
+          .select("*")
+          .eq("passage_id", passageData.id)
+          .order("created_at", { ascending: true });
 
       if (vocabularyError) {
         setErrorMessage(vocabularyError.message);
@@ -66,17 +72,19 @@ function ReadingLevel() {
         return;
       }
 
-      const formattedQuestions = (questionData || []).map((question) => ({
-        question: question.question,
-        options: [
-          question.option_a,
-          question.option_b,
-          question.option_c,
-        ],
-        answer: question.correct_answer,
-        explanation: question.explanation,
-        bloom: question.bloom_level,
-      }));
+      const formattedQuestions = (questionData || []).map(
+        (question) => ({
+          question: question.question,
+          options: [
+            question.option_a,
+            question.option_b,
+            question.option_c,
+          ],
+          answer: question.correct_answer,
+          explanation: question.explanation,
+          bloom: question.bloom_level,
+        })
+      );
 
       setPassage(passageData);
       setQuestions(formattedQuestions);
@@ -97,7 +105,78 @@ function ReadingLevel() {
     }));
   }
 
-  function checkAnswers() {
+  async function saveResult(
+    calculatedScore,
+    calculatedPercentage
+  ) {
+    const savedProfile = localStorage.getItem("studentProfile");
+
+    if (!savedProfile) {
+      setResultMessage(
+        "Please log in before saving your result."
+      );
+      return;
+    }
+
+    let studentProfile;
+
+    try {
+      studentProfile = JSON.parse(savedProfile);
+    } catch (error) {
+      console.error("Invalid student profile:", error);
+
+      setResultMessage(
+        "Unable to read the student profile."
+      );
+
+      return;
+    }
+
+    if (
+      !studentProfile.id ||
+      !studentProfile.class_id ||
+      !passage?.id
+    ) {
+      setResultMessage(
+        "Student information is incomplete."
+      );
+
+      return;
+    }
+
+    setSavingResult(true);
+
+    const { error } = await supabase
+      .from("student_results")
+      .insert([
+        {
+          student_id: studentProfile.id,
+          class_id: studentProfile.class_id,
+          passage_id: passage.id,
+          skill: "Reading",
+          cefr_level: passage.cefr_level,
+          score: calculatedScore,
+          total_questions: questions.length,
+          percentage: calculatedPercentage,
+        },
+      ]);
+
+    if (error) {
+      console.error("Result save error:", error);
+
+      setResultMessage(
+        `Unable to save result: ${error.message}`
+      );
+
+      setSavingResult(false);
+      return;
+    }
+
+    setResultMessage("Result saved successfully ✅");
+    setSavingResult(false);
+  }
+
+  async function checkAnswers() {
     let correctAnswers = 0;
 
     questions.forEach((question, index) => {
@@ -106,8 +185,20 @@ function ReadingLevel() {
       }
     });
 
+    const calculatedPercentage =
+      questions.length > 0
+        ? Math.round(
+            (correctAnswers / questions.length) * 100
+          )
+        : 0;
+
     setScore(correctAnswers);
     setShowResults(true);
+
+    await saveResult(
+      correctAnswers,
+      calculatedPercentage
+    );
   }
 
   const percentage =
@@ -136,22 +227,31 @@ function ReadingLevel() {
     return (
       <main className="reading-level-page">
         <h1>Level {level}</h1>
-        <p>No reading passage is available for this level yet.</p>
+
+        <p>
+          No reading passage is available for this level yet.
+        </p>
       </main>
     );
   }
 
   return (
     <main className="reading-level-page">
+
       <section className="reading-level-header">
-        <p className="reading-label">CEFR Reading Practice</p>
+        <p className="reading-label">
+          CEFR Reading Practice
+        </p>
 
         <h1>{passage.title}</h1>
 
-        <p>CEFR Level: {passage.cefr_level}</p>
+        <p>
+          CEFR Level: {passage.cefr_level}
+        </p>
       </section>
 
       <section className="reading-level-content">
+
         <h2>Reading Passage</h2>
 
         <p className="reading-passage">
@@ -198,16 +298,21 @@ function ReadingLevel() {
           <button
             type="button"
             onClick={checkAnswers}
+            disabled={savingResult}
           >
-            Check Answers
+            {savingResult
+              ? "Saving..."
+              : "Check Answers"}
           </button>
         )}
 
         {score !== null && (
           <section className="score-card">
+
             <h2>Reading Performance</h2>
 
             <div className="score-summary">
+
               <p>
                 <strong>Score:</strong>{" "}
                 {score} / {questions.length}
@@ -222,6 +327,7 @@ function ReadingLevel() {
                 <strong>CEFR Level:</strong>{" "}
                 {passage.cefr_level}
               </p>
+
             </div>
 
             <div className="result-progress">
@@ -240,9 +346,18 @@ function ReadingLevel() {
                 ? "👍 Good Progress"
                 : "📚 Keep Practising"}
             </h3>
+
+            {resultMessage && (
+              <p className="result-save-message">
+                {resultMessage}
+              </p>
+            )}
+
           </section>
         )}
+
       </section>
+
     </main>
   );
 }
