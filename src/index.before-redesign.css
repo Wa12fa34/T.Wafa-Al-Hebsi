@@ -1,0 +1,614 @@
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #fff;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #9ca3af;
+    --text-h: #f3f4f6;
+    --bg: #16171d;
+    --border: #2e303a;
+    --code-bg: #1f2028;
+    --accent: #c084fc;
+    --accent-bg: rgba(192, 132, 252, 0.15);
+    --accent-border: rgba(192, 132, 252, 0.5);
+    --social-bg: rgba(47, 48, 58, 0.5);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+
+  #social .button-icon {
+    filter: invert(1) brightness(2);
+  }
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+/* =========================================
+   PROFESSIONAL STUDENT MANAGEMENT
+========================================= */
+
+.student-management-page {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 48px 0 80px;
+}
+
+/* Header */
+
+.student-management-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.student-management-header h1 {
+  margin: 12px 0;
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  letter-spacing: -0.04em;
+}
+
+.student-management-header > p {
+  margin: 6px 0;
+  color: var(--text-secondary);
+}
+
+/* Form Card */
+
+.student-management-form-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 30px;
+  margin-bottom: 28px;
+}
+
+.student-management-section-title {
+  margin-bottom: 24px;
+}
+
+.student-management-section-title > p {
+  color: var(--primary);
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.student-management-section-title h2 {
+  margin: 0 0 8px;
+  font-size: 2rem;
+}
+
+.student-management-section-title span {
+  color: var(--text-secondary);
+}
+
+/* Form */
+
+.student-management-form {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  align-items: end;
+}
+
+.student-management-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.student-management-field label {
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.student-management-field input,
+.student-management-field select {
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 14px;
+
+  background: #ffffff;
+
+  border: 1px solid #d0d5dd;
+  border-radius: 12px;
+
+  color: var(--text-main);
+  font-size: 1rem;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.student-management-field input:focus,
+.student-management-field select:focus {
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 4px rgba(79, 70, 229, 0.12);
+}
+
+.student-management-actions {
+  grid-column: 1 / -1;
+
+  display: flex;
+  gap: 12px;
+
+  margin-top: 4px;
+}
+
+.student-management-save-button {
+  border: none;
+  border-radius: 12px;
+
+  padding: 14px 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--secondary)
+    );
+
+  color: #ffffff;
+
+  font-weight: 800;
+  font-size: 1rem;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 24px rgba(79, 70, 229, 0.2);
+}
+
+.student-management-save-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.student-management-cancel-button {
+  border: 1px solid #d0d5dd;
+  border-radius: 12px;
+
+  padding: 14px 22px;
+
+  background: #ffffff;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+/* Success / Error */
+
+.student-management-success,
+.student-management-error {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+.student-management-success {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.student-management-error {
+  background: #fef2f2;
+  color: #b42318;
+}
+
+/* =========================================
+   TEMPORARY LOGIN DETAILS CARD
+========================================= */
+
+.temporary-password-card {
+  margin-bottom: 30px;
+  padding: 28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #f4f1ff
+    );
+
+  border: 1px solid #ddd6fe;
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-md);
+}
+
+.temporary-password-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.temporary-password-header p {
+  margin: 0 0 6px;
+
+  color: var(--success);
+  font-weight: 800;
+}
+
+.temporary-password-header h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.temporary-password-close {
+  width: 40px;
+  height: 40px;
+
+  border: 1px solid #d0d5dd;
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.temporary-password-details {
+  margin-top: 20px;
+}
+
+.temporary-password-details p {
+  margin: 8px 0;
+}
+
+.temporary-password-warning {
+  color: #92400e;
+
+  background: #fffbeb;
+
+  border-radius: 10px;
+
+  padding: 10px 12px;
+}
+
+.temporary-password-value {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-top: 18px;
+
+  padding: 16px;
+
+  background: #111827;
+
+  border-radius: 14px;
+}
+
+.temporary-password-value code {
+  flex: 1;
+
+  color: #ffffff;
+
+  font-size: 1.05rem;
+  font-weight: 800;
+
+  overflow-wrap: anywhere;
+}
+
+.temporary-password-value button,
+.copy-login-details-button {
+  border: none;
+  border-radius: 10px;
+
+  padding: 11px 16px;
+
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.temporary-password-value button {
+  background: #ffffff;
+  color: #111827;
+}
+
+.copy-login-details-button {
+  margin-top: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--secondary)
+    );
+
+  color: #ffffff;
+}
+
+/* =========================================
+   STUDENT DIRECTORY
+========================================= */
+
+.student-management-list-section {
+  background: #ffffff;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-md);
+
+  padding: 28px;
+}
+
+.student-management-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+
+  margin-bottom: 22px;
+}
+
+.student-management-list-header p {
+  margin: 0 0 4px;
+
+  color: var(--primary);
+
+  font-weight: 800;
+}
+
+.student-management-list-header h2 {
+  margin: 0;
+}
+
+.student-management-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.student-management-filter label {
+  font-weight: 700;
+}
+
+.student-management-filter select {
+  min-width: 190px;
+
+  padding: 10px 12px;
+
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+
+  background: #ffffff;
+}
+
+/* Table */
+
+.student-management-table {
+  overflow-x: auto;
+
+  border: 1px solid #eaecf0;
+  border-radius: 16px;
+}
+
+.student-management-row {
+  min-width: 850px;
+
+  display: grid;
+  grid-template-columns:
+    1.8fr
+    1.4fr
+    0.7fr
+    1fr
+    1.7fr;
+
+  gap: 16px;
+  align-items: center;
+
+  padding: 18px 20px;
+
+  border-bottom: 1px solid #eaecf0;
+}
+
+.student-management-row:last-child {
+  border-bottom: none;
+}
+
+.student-management-table-header {
+  background: var(--surface-soft);
+
+  color: var(--text-secondary);
+
+  font-size: 0.88rem;
+  font-weight: 800;
+
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.student-management-name {
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.student-management-row-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.student-management-edit-button,
+.student-reset-password-button {
+  border-radius: 10px;
+
+  padding: 9px 12px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.student-management-edit-button {
+  border: 1px solid #d0d5dd;
+
+  background: #ffffff;
+
+  color: var(--text-main);
+}
+
+.student-reset-password-button {
+  border: none;
+
+  background: #ede9fe;
+
+  color: var(--primary);
+}
+
+.student-reset-password-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Hover */
+
+.student-management-row:not(
+  .student-management-table-header
+):hover {
+  background: #fafafa;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .student-management-form {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .student-management-list-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .student-management-filter select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 650px) {
+  .student-management-page {
+    width: min(100% - 24px, 1200px);
+    padding-top: 30px;
+  }
+
+  .student-management-form {
+    grid-template-columns: 1fr;
+  }
+
+  .student-management-actions {
+    flex-direction: column;
+  }
+
+  .student-management-save-button,
+  .student-management-cancel-button {
+    width: 100%;
+  }
+
+  .temporary-password-value {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .temporary-password-value button,
+  .copy-login-details-button {
+    width: 100%;
+  }
+}
